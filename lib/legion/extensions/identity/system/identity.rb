@@ -7,7 +7,7 @@ module Legion
     module Identity
       module System
         module Identity
-          extend self
+          module_function
 
           def provider_name
             :system
@@ -42,11 +42,11 @@ module Legion
 
             {
               canonical_name: normalized,
-              kind: :human,
-              source: :system,
-              persistent: false,
-              groups: [],
-              profile: {
+              kind:           :human,
+              source:         :system,
+              persistent:     false,
+              groups:         [],
+              profile:        {
                 username: raw,
                 hostname: ::Socket.gethostname
               }
