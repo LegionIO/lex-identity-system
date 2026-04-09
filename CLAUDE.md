@@ -60,7 +60,7 @@ No runners, no actors, no transport, no helpers. Strictly minimal.
 
 ```bash
 bundle install
-bundle exec rspec     # ~30 specs
+bundle exec rspec     # 38 specs across 1 spec file
 bundle exec rubocop   # Clean
 ```
 
