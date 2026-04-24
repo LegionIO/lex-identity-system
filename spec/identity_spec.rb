@@ -45,6 +45,12 @@ RSpec.describe Legion::Extensions::Identity::System::Identity do
     end
   end
 
+  describe '.trust_level' do
+    it 'returns :unverified for trust_level' do
+      expect(identity.trust_level).to eq(:unverified)
+    end
+  end
+
   describe '.capabilities' do
     it 'returns [:profile] only' do
       expect(identity.capabilities).to eq([:profile])
@@ -115,7 +121,7 @@ RSpec.describe Legion::Extensions::Identity::System::Identity do
       before { allow(ENV).to receive(:fetch).with('USER', nil).and_return('jsmith@EXAMPLE.COM') }
 
       it 'strips the realm from canonical_name' do
-        expect(identity.resolve[:canonical_name]).to eq('jsmithexamplecom')
+        expect(identity.resolve[:canonical_name]).to eq('jsmith')
       end
 
       it 'preserves the original value in profile' do
@@ -167,12 +173,12 @@ RSpec.describe Legion::Extensions::Identity::System::Identity do
       expect(identity.normalize('  user  ')).to eq('user')
     end
 
-    it 'removes dots (AMQP word separator)' do
-      expect(identity.normalize('first.last')).to eq('firstlast')
+    it 'converts dots to hyphens (AMQP word separator)' do
+      expect(identity.normalize('first.last')).to eq('first-last')
     end
 
-    it 'removes @ and realm suffix' do
-      expect(identity.normalize('user@REALM.COM')).to eq('userrealmcom')
+    it 'strips @realm suffix and returns only the username part' do
+      expect(identity.normalize('user@REALM.COM')).to eq('user')
     end
 
     it 'removes special characters' do
