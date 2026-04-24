@@ -60,7 +60,7 @@ module Legion
           def normalize(val)
             str = val.to_s.downcase.strip
             str = str.split('@', 2).first if str.include?('@')
-            str.gsub('.', '-').gsub(/[^a-z0-9_-]/, '')
+            str.tr('.', '-').gsub(/[^a-z0-9_-]/, '')
           end
         end
       end
