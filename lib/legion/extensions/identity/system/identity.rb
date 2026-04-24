@@ -29,6 +29,10 @@ module Legion
             200
           end
 
+          def trust_level
+            :unverified
+          end
+
           def capabilities
             [:profile]
           end
@@ -54,7 +58,9 @@ module Legion
           end
 
           def normalize(val)
-            val.to_s.downcase.strip.gsub(/[^a-z0-9_-]/, '')
+            str = val.to_s.downcase.strip
+            str = str.split('@', 2).first if str.include?('@')
+            str.tr('.', '-').gsub(/[^a-z0-9_-]/, '')
           end
         end
       end

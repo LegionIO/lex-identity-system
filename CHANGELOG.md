@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+
+## [0.2.0] - 2026-04-24
+
+### Added
+- `trust_level` method returning `:unverified` on provider contract
+- Self-registration with `Legion::Identity::Resolver` at load time
+
+### Fixed
+- `normalize` now strips `@domain` and converts dots to hyphens (`matt.iverson@optum.com` → `matt-iverson` instead of `mattiversonoptumcom`)
+
 ## [0.1.1] - 2026-04-09
 
 ### Changed
